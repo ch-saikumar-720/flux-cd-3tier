@@ -3,29 +3,45 @@ kind: HelmRelease
 metadata:
   name: three-tier
   namespace: default
+
 spec:
   interval: 1m
+
   chart:
     spec:
       chart: ./3-tier-app
+
       sourceRef:
         kind: GitRepository
         name: helm-repo
         namespace: flux-system
+
   values:
+
+    ingress:
+      enabled: true
+      className: alb
+      scheme: internet-facing
+      targetType: ip
+
     applications:
+
       frontend:
         enabled: true
         replicaCount: 1
+
         image:
           repository: 814636798023.dkr.ecr.us-east-1.amazonaws.com/frontend
           tag: frontend-app
+
       backend:
         enabled: true
         replicaCount: 1
+
         image:
           repository: 814636798023.dkr.ecr.us-east-1.amazonaws.com/backend
           tag: backend-app
+
     database:
       host: ecommerce.ccx0y0aq40h4.us-east-1.rds.amazonaws.com
       name: ecommerce
