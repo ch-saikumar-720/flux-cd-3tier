@@ -1,0 +1,33 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: three-tier
+  namespace: default
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: ./3-tier-app
+      sourceRef:
+        kind: GitRepository
+        name: helm-repo
+        namespace: flux-system
+  values:
+    applications:
+      frontend:
+        enabled: true
+        replicaCount: 1
+        image:
+          repository: 814636798023.dkr.ecr.us-east-1.amazonaws.com/frontend
+          tag: latest
+      backend:
+        enabled: true
+        replicaCount: 1
+        image:
+          repository: 814636798023.dkr.ecr.us-east-1.amazonaws.com/backend
+          tag: latest
+    database:
+      host: ecommerce.ccx0y0aq40h4.us-east-1.rds.amazonaws.com
+      name: ecommerce
+      user: admin
+      password: mysecurepassword

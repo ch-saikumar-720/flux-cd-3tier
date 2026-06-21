@@ -1,0 +1,19 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+
+kind: GitRepository
+
+metadata:
+
+  name: helm-repo
+
+  namespace: flux-system
+
+spec:
+
+  interval: 1m
+
+  url: https://github.com/ch-saikumar-720/Heml-charts-3tier
+
+  ref:
+
+    branch: main
