@@ -27,7 +27,7 @@ spec:
 
       frontend:
         enabled: true
-        replicaCount: 2
+        replicaCount: 1
 
         image:
           repository: 814636798023.dkr.ecr.us-east-1.amazonaws.com/frontend
@@ -41,7 +41,7 @@ spec:
 
       backend:
         enabled: true
-        replicaCount: 2
+        replicaCount: 1
 
         image:
           repository: 814636798023.dkr.ecr.us-east-1.amazonaws.com/backend
